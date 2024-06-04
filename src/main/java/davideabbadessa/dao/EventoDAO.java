@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
+import java.util.List;
+
 public class EventoDAO {
     private EntityManagerFactory emf;
 
@@ -61,5 +63,13 @@ public class EventoDAO {
         }
     }
 
+    public List<Evento> findAll() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return em.createQuery("FROM Evento", Evento.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }
 
 }
